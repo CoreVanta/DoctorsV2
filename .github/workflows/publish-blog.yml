@@ -1,0 +1,41 @@
+name: Auto-Publish Blog
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Generate Static Pages
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          cd backend
+          node generate-blog.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'Blog Bot'
+          git config --global user.email 'bot@noreply.github.com'
+          git add articles/ blog.html
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-publish new articles" && git push)

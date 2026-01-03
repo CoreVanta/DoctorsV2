@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدور الحالي - شاشة العيادة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            cursor: none;
+        }
+
+        /* Hide cursor for kiosk feel */
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen flex flex-col overflow-hidden">
+
+    <!-- Navbar (Minimal - Just Logo) -->
+    <nav class="w-full p-6 flex justify-center opacity-60">
+        <span class="text-xl font-black text-white tracking-widest">عيادة د. أحمد</span>
+    </nav>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4 text-center -mt-10">
+
+        <div class="mb-6">
+            <span
+                class="inline-block px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold animate-pulse">
+                • مباشر الآن
+            </span>
+        </div>
+
+        <h1 class="text-3xl text-gray-400 mb-6 font-semibold">الدور الحالي بالكشف</h1>
+
+        <div class="relative group cursor-default">
+            <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-3xl blur opacity-20">
+            </div>
+            <div id="currentNumber"
+                class="relative bg-gray-800 w-56 h-56 md:w-64 md:h-64 flex items-center justify-center rounded-3xl shadow-2xl text-[8rem] md:text-[9rem] font-black text-white leading-none tracking-tighter">
+                --
+            </div>
+        </div>
+
+        <div class="mt-12 grid grid-cols-2 gap-8 w-full max-w-lg">
+            <div class="bg-gray-800/50 p-5 rounded-2xl backdrop-blur border border-gray-700">
+                <span class="block text-gray-500 text-base mb-1">الدور القادم</span>
+                <span id="nextNumber" class="block text-4xl font-bold text-blue-400">--</span>
+            </div>
+            <div class="bg-gray-800/50 p-5 rounded-2xl backdrop-blur border border-gray-700">
+                <span class="block text-gray-500 text-base mb-1">وقت الانتظار</span>
+                <span class="block text-4xl font-bold text-yellow-400">~15 <span
+                        class="text-lg font-normal">دقيقة</span></span>
+            </div>
+        </div>
+
+    </main>
+    <script type="module" src="../assets/js/firebase-config.js"></script>
+    <script type="module" src="../assets/js/app-logic.js"></script>
+</body>
+
+</html>

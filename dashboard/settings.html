@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعدادات العيادة - ClinicCore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <nav class="bg-white shadow p-4 mb-6 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-gray-800">⚙️ إعدادات العيادة</h1>
+        <div class="flex gap-4">
+            <a href="doctor-vitals.html" class="text-blue-600 hover:text-blue-800">عرض العيادة</a>
+            <button id="logoutBtn" class="text-red-600 hover:text-red-800">خروج</button>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 max-w-3xl">
+        <div class="bg-white p-8 rounded-lg shadow">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">مواعيد العمل</h2>
+            <form id="settingsForm" class="space-y-6">
+                <!-- Working Days -->
+                <div>
+                    <label class="block font-bold mb-2">أيام العمل</label>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <label class="flex items-center gap-2 bg-gray-50 p-3 rounded border">
+                            <input type="checkbox" name="workDays" value="Saturday" class="h-5 w-5"> السبت
+                        </label>
+                        <label class="flex items-center gap-2 bg-gray-50 p-3 rounded border">
+                            <input type="checkbox" name="workDays" value="Sunday" class="h-5 w-5"> الأحد
+                        </label>
+                        <label class="flex items-center gap-2 bg-gray-50 p-3 rounded border">
+                            <input type="checkbox" name="workDays" value="Monday" class="h-5 w-5"> الاثنين
+                        </label>
+                        <label class="flex items-center gap-2 bg-gray-50 p-3 rounded border">
+                            <input type="checkbox" name="workDays" value="Tuesday" class="h-5 w-5"> الثلاثاء
+                        </label>
+                        <label class="flex items-center gap-2 bg-gray-50 p-3 rounded border">
+                            <input type="checkbox" name="workDays" value="Wednesday" class="h-5 w-5"> الأربعاء
+                        </label>
+                        <label class="flex items-center gap-2 bg-gray-50 p-3 rounded border">
+                            <input type="checkbox" name="workDays" value="Thursday" class="h-5 w-5"> الخميس
+                        </label>
+                        <label class="flex items-center gap-2 bg-gray-50 p-3 rounded border">
+                            <input type="checkbox" name="workDays" value="Friday" class="h-5 w-5"> الجمعة
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-bold mb-2">بداية العمل</label>
+                        <input type="time" id="openTime" class="w-full border p-2 rounded">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">نهاية العمل</label>
+                        <input type="time" id="closeTime" class="w-full border p-2 rounded">
+                    </div>
+                </div>
+
+                <!-- Holiday Mode -->
+                <div class="border-t pt-4">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="holidayMode" class="h-5 w-5 text-red-600 rounded">
+                        <span class="font-bold text-red-600">🛑 تفعيل وضع "إجازة مؤقتة" (يمنع الحجز)</span>
+                    </label>
+                    <p class="text-sm text-gray-500 mt-1 mr-7">عند التفعيل، ستظهر رسالة للمرضى بأن العيادة مغلقة حالياً.
+                    </p>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700">حفظ
+                        الإعدادات</button>
+                    <p id="saveMsg" class="text-center text-green-600 mt-2 hidden">تم الحفظ بنجاح!</p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="../assets/js/firebase-config.js"></script>
+    <script type="module" src="../assets/js/app-logic.js"></script>
+</body>
+
+</html>

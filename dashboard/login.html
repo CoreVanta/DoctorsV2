@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - ClinicCore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
+        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">دخول الموظفين</h2>
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label class="block text-gray-600 mb-1">البريد الإلكتروني</label>
+                <input type="email" id="email" required
+                    class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-600 mb-1">كلمة المرور</label>
+                <input type="password" id="password" required
+                    class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-800 text-white py-2 rounded font-bold hover:bg-blue-900 transition">
+                دخول
+            </button>
+        </form>
+    </div>
+    <script type="module" src="../assets/js/firebase-config.js"></script>
+    <script type="module" src="../assets/js/app-logic.js"></script>
+</body>
+
+</html>

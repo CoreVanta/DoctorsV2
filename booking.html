@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز موعد - ClinicCore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black text-blue-800">د. أحمد <span
+                    class="text-blue-500">للباطنة</span></a>
+            <div class="flex gap-6 font-semibold text-gray-600">
+                <a href="index.html" class="hover:text-blue-600 transition hidden md:block">الرئيسية</a>
+                <a href="queue-live.html" class="hover:text-blue-600 transition">متابعة الدور</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center p-6">
+        <div class="w-full max-w-lg bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="bg-blue-600 p-8 text-center text-white">
+                <h2 class="text-3xl font-bold mb-2">حجز موعد جديد</h2>
+                <p class="text-blue-100">سجل بياناتك وسيتم تحويلك لتأكيد الحجز</p>
+            </div>
+
+            <form id="bookingForm" class="p-8 space-y-6">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">الاسم ثلاثي</label>
+                    <input type="text" id="patientName" required placeholder="مثال: محمد أحمد علي"
+                        class="w-full px-4 py-3 border-2 border-gray-100 rounded-xl focus:border-blue-500 focus:ring-0 outline-none transition bg-gray-50">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">رقم الهاتف (واتساب)</label>
+                    <input type="tel" id="patientPhone" required placeholder="01xxxxxxxxx"
+                        class="w-full px-4 py-3 border-2 border-gray-100 rounded-xl focus:border-blue-500 focus:ring-0 outline-none transition bg-gray-50">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">تاريخ الحجز</label>
+                    <input type="date" id="appointmentDate" required
+                        class="w-full px-4 py-3 border-2 border-gray-100 rounded-xl focus:border-blue-500 focus:ring-0 outline-none transition bg-gray-50">
+                    <p id="clinicHoursInfo" class="text-sm text-blue-600 mt-2 font-semibold"><!-- Loaded by JS --></p>
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">الشكوى (اختياري)</label>
+                    <textarea id="complaint" rows="3" placeholder="اكتب شكواك هنا باختصار..."
+                        class="w-full px-4 py-3 border-2 border-gray-100 rounded-xl focus:border-blue-500 focus:ring-0 outline-none transition bg-gray-50"></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1">
+                    تأكيد الحجز والاستمرار
+                </button>
+                <p class="text-xs text-center text-gray-400 mt-4">
+                    بالضغط على تأكيد، توافق على سياسة العيادة في الحجز.
+                </p>
+            </form>
+        </div>
+    </main>
+
+    <footer class="text-center py-6 text-gray-400 text-sm">
+        &copy; 2024 ClinicCore. جميع الحقوق محفوظة.
+    </footer>
+
+    <script type="module" src="../assets/js/firebase-config.js"></script>
+    <script type="module" src="../assets/js/app-logic.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>د. أحمد - عيادة الباطنة والقلب</title>
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .hero-pattern {
+            background-color: #f3f4f6;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e5e7eb' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur shadow-sm transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-black text-blue-800 tracking-tight">د. أحمد <span
+                    class="text-blue-500">للباطنة</span></a>
+            <div class="hidden md:flex gap-8 font-semibold text-gray-600">
+                <a href="#home" class="hover:text-blue-600 transition">الرئيسية</a>
+                <a href="#services" class="hover:text-blue-600 transition">خدماتنا</a>
+                <a href="doctor-profile.html" class="hover:text-blue-600 transition">من نحن</a>
+                <a href="blog.html" class="hover:text-blue-600 transition">المقالات</a>
+            </div>
+            <a href="booking.html"
+                class="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:bg-blue-700 hover:shadow-xl transition transform hover:-translate-y-0.5">احجز
+                موعدك</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 hero-pattern">
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 text-center lg:text-right">
+                <span
+                    class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-bold inline-block mb-2">رعاية
+                    متخصصة، قريبة منك</span>
+                <h1 class="text-4xl lg:text-6xl font-black leading-tight text-gray-900">
+                    صحتك أولويتنا، <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">بلمسة
+                        إنسانية.</span>
+                </h1>
+                <p class="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    نقدم خدمات طبية متكاملة في تشخيص وعلاج أمراض الباطنة والقلب بأحدث الطرق العلمية، مع نظام حجز ذكي
+                    يوفر وقتك.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                    <a href="booking.html"
+                        class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-blue-700 transition w-full sm:w-auto text-center">احجز
+                        موعد الآن</a>
+                    <a href="queue-live.html"
+                        class="bg-white text-gray-800 border-2 border-gray-200 px-8 py-4 rounded-xl font-bold text-lg hover:border-blue-600 hover:text-blue-600 transition w-full sm:w-auto text-center flex items-center justify-center gap-2">
+                        <span>متابعة الدور</span>
+                        <span class="relative flex h-3 w-3">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="relative hidden lg:block">
+                <div
+                    class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-lg opacity-30">
+                </div>
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1000"
+                    alt="Doctor" class="relative rounded-2xl shadow-2xl w-full object-cover h-[500px]">
+
+                <!-- Floating Card -->
+                <div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-xl shadow-xl border border-gray-100 max-w-xs animate-bounce"
+                    style="animation-duration: 3s;">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-green-100 p-3 rounded-full text-green-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">حجوزات اليوم</p>
+                            <p class="text-xl font-bold text-gray-900">+40 مريض</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black text-gray-900 mb-4">خدمات العيادة</h2>
+                <p class="text-gray-600 max-w-xl mx-auto">نقدم مجموعة شاملة من الخدمات التشخيصية والعلاجية.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition group">
+                    <div
+                        class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-blue-600 group-hover:text-white transition">
+                        🩺</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">كشف باطنة عامة</h3>
+                    <p class="text-gray-500">فحص دقيق وتشخيص شامل لجميع الأمراض الباطنية المزمنة والحادة.</p>
+                </div>
+                <!-- Service Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition group">
+                    <div
+                        class="w-14 h-14 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-purple-600 group-hover:text-white transition">
+                        ❤️</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">متابعة مرضى القلب</h3>
+                    <p class="text-gray-500">رعاية خاصة لمرضى الضغط والقلب وتخطيط القلب (ECG).</p>
+                </div>
+                <!-- Service Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition group">
+                    <div
+                        class="w-14 h-14 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-green-600 group-hover:text-white transition">
+                        📈</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">متابعة السكر</h3>
+                    <p class="text-gray-500">برامج غذائية وعلاجية لضبط السكر وتجنب المضاعفات.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content/Blog Preview Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black text-gray-900 mb-4">أحدث المعلومات الطبية</h2>
+                <p class="text-gray-600 max-w-xl mx-auto">تابع آخر المقالات والنصائح الطبية من الدكتور مباشرة.</p>
+            </div>
+
+            <div id="homeArticles" class="grid md:grid-cols-3 gap-8">
+                <!-- Loaded dynamically by JS -->
+                <div class="animate-pulse bg-gray-100 h-64 rounded-xl"></div>
+                <div class="animate-pulse bg-gray-100 h-64 rounded-xl"></div>
+                <div class="animate-pulse bg-gray-100 h-64 rounded-xl"></div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="blog.html"
+                    class="inline-flex items-center gap-2 text-blue-600 font-bold hover:gap-4 transition-all">تصفح كل
+                    المقالات <span class="text-xl">&larr;</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact Section -->
+    <section id="location" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <h2 class="text-3xl font-black text-gray-900">أين تجدنا؟</h2>
+                    <p class="text-gray-600 text-lg">العيادة تقع في موقع متميز بوسط المدينة، سهلة الوصول إليها
+                        بالمواصلات أو السيارة.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-blue-100 p-3 rounded-full text-blue-600">📍</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">العنوان</h3>
+                                <p class="text-gray-600">123 شارع العيادة، برج الأطباء، الدور الرابع، وسط البلد.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-green-100 p-3 rounded-full text-green-600">📞</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">أرقام التواصل</h3>
+                                <p class="text-gray-600 font-lrt" dir="ltr">+20 100 000 0000</p>
+                                <p class="text-gray-600">متاح واتساب طوال اليوم.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-purple-100 p-3 rounded-full text-purple-600">🕒</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">مواعيد العمل</h3>
+                                <p class="text-gray-600">السبت - الخميس: 5 مساءً - 10 مساءً</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/201000000000"
+                        class="inline-flex items-center gap-3 bg-green-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-green-600 transition shadow-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.631 3.891 1.59 5.396l.3.475-1.553 3.62L6.163 20 .666 20.375z" />
+                        </svg>
+                        تواصل عبر واتساب
+                    </a>
+                </div>
+
+                <!-- Map Embed -->
+                <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white h-80 lg:h-96 relative">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1519.8643891461875!2d31.2357116!3d30.0444196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840b10f0f0f0f%3A0x10f0f0f0f0f0f0f0!2sDowntown%20Cairo!5e0!3m2!1sen!2seg!4v1620000000000!5m2!1sen!2seg"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-8 text-center md:text-right">
+            <div>
+                <h3 class="text-2xl font-bold mb-4">د. أحمد</h3>
+                <p class="text-gray-400 leading-relaxed">استشاري الباطنة والقلب. نسعى لتقديم رعاية طبية متميزة باستخدام
+                    أحدث التقنيات لضمان راحتكم وسلامتكم.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4 text-blue-400">روابط سريعة</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="index.html" class="hover:text-white transition">الرئيسية</a></li>
+                    <li><a href="booking.html" class="hover:text-white transition">حجز موعد</a></li>
+                    <li><a href="doctor-profile.html" class="hover:text-white transition">عن الطبيب</a></li>
+                    <li><a href="blog.html" class="hover:text-white transition">المقالات الطبية</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4 text-green-400">تواصل معنا</h4>
+                <p class="text-gray-400 mb-2">📞 <span dir="ltr">+20 100 000 0000</span></p>
+                <p class="text-gray-400 mb-2">📍 وسط البلد، برج الأطباء، الدور الرابع</p>
+                <div class="mt-4 flex justify-center md:justify-start gap-4">
+                    <a href="#"
+                        class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition">f</a>
+                    <a href="#"
+                        class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition">w</a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+            <p>&copy; 2024 جميع الحقوق محفوظة لعيادة د. أحمد.</p>
+            <div class="mt-2 space-x-4 space-x-reverse">
+                <a href="privacy.html" class="hover:text-white transition">سياسة الخصوصية</a>
+                <span>|</span>
+                <a href="terms.html" class="hover:text-white transition">شروط الاستخدام</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="assets/js/firebase-config.js"></script>
+    <script type="module" src="assets/js/app-logic.js"></script>
+    <script type="module">
+        import { loadHomeArticles } from 'assets/js/app-logic.js';
+        document.addEventListener('DOMContentLoaded', loadHomeArticles);
+    </script>
+</body>
+
+</html>
