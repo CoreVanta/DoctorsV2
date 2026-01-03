@@ -513,66 +513,129 @@ window.editQueueNumber = async (id, oldNum) => {
 };
 
 // --- 11. Patient History Search ---
-window.searchPatientHistory = async (optionalPhone) => {
-    const phoneInput = document.getElementById('searchPhone');
+export async function searchPatientHistory(optionalPhone) {
+    const searchInput = document.getElementById('historySearchInput');
+    const phone = optionalPhone || (searchInput ? searchInput.value : null);
+
+    if (!phone) return;
+
     const resultsDiv = document.getElementById('historyResults');
-    const listBody = document.getElementById('historyList');
-
-    // Auto-search logic
-    let phone = optionalPhone;
-    if (!phone && phoneInput) phone = phoneInput.value.trim();
-
-    if (!phone || !resultsDiv) return;
-
-    // UI Loading
-    if (listBody) listBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center">جاري البحث...</td></tr>';
-    if (resultsDiv) resultsDiv.classList.remove('hidden');
+    if (resultsDiv) resultsDiv.innerHTML = "<div class='text-center py-4'>جاري البحث...</div>";
 
     try {
-        // Query: Phone + Status=done
-        const q = query(
-            collection(db, "appointments"),
-            where("patientPhone", "==", phone),
-            limit(20)
-        );
+        const q = query(collection(db, "appointments"), where("patientPhone", "==", phone), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
 
-        const snapshot = await getDocs(q);
+        if (resultsDiv) {
+            if (snap.empty) {
+                resultsDiv.innerHTML = "<div class='text-center py-4 text-gray-400'>لا يوجد تاريخ مسبق لهذا الرقم.</div>";
+            } else {
+                resultsDiv.innerHTML = "";
+                snap.forEach(docSnap => {
+                    const data = docSnap.data();
+                    const dateStr = data.appointmentDate || "غير محدد";
+                    const status = data.status === 'confirmed' ? 'تم الكشف' : (data.status === 'completed' ? 'منتهي' : 'حجز');
 
-        if (snapshot.empty) {
-            if (listBody) listBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">لا يوجد سجل لهذا الرقم</td></tr>';
-            return;
+                    const item = document.createElement('div');
+                    item.className = "p-4 border-b border-gray-100 hover:bg-gray-50 transition";
+                    item.innerHTML = `
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="font-bold text-gray-800">${dateStr}</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-700">${status}</span>
+                        </div>
+                        <div class="text-sm text-gray-600 mb-2">${data.complaint || 'بدون شكوى مسجلة'}</div>
+                        ${data.notes ? `<div class="text-xs bg-yellow-50 p-2 rounded text-gray-700"><strong>التشخيص:</strong> ${data.notes}</div>` : ''}
+                        ${data.fileLink ? `<a href="${data.fileLink}" target="_blank" class="text-xs text-blue-600 underline mt-2 inline-block">عرض الملف الطبي</a>` : ''}
+                    `;
+                    resultsDiv.appendChild(item);
+                });
+            }
         }
-
-        const visits = snapshot.docs.map(d => ({ id: d.id, ...d.data() }))
-            // Soft client-side filter for now to avoid complex index requirements if not set
-            .filter(d => d.status === 'done')
-            .sort((a, b) => (b.appointmentDate || "").localeCompare(a.appointmentDate || ""));
-
-        if (visits.length === 0) {
-            if (listBody) listBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">لا يوجد زيارات سابقة مكتملة</td></tr>';
-            return;
-        }
-
-        if (listBody) {
-            listBody.innerHTML = "";
-            visits.forEach(v => {
-                const tr = document.createElement('tr');
-                tr.className = "border-b hover:bg-gray-50";
-                tr.innerHTML = `
-                    <td class="p-3 whitespace-nowrap">${v.appointmentDate}</td>
-                    <td class="p-3 text-gray-700 font-bold">${v.patientName}</td>
-                    <td class="p-3 text-gray-600">${v.complaint || "-"}</td>
-                    <td class="p-3 text-xs text-blue-800 font-semibold max-w-xs break-words bg-blue-50 rounded">${v.doctorNotes || "-"}</td>
-                    <td class="p-3">
-                        ${v.fileLink ? `<a href="${v.fileLink}" target="_blank" class="text-blue-600 underline text-xs">ملف</a>` : '-'}
-                    </td>
-                `;
-                listBody.appendChild(tr);
-            });
-        }
-
     } catch (e) {
         console.error(e);
-        if (listBody) listBody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-500">خطأ: ${e.message}</td></tr>`;
+        if (resultsDiv) resultsDiv.innerHTML = "<div class='text-red-500'>خطأ في تحميل التاريخ.</div>";
     }
-};
+}
+
+// --- 12. Blog & Home Articles ---
+
+export async function loadHomeArticles() {
+    const container = document.getElementById('homeArticles');
+    if (!container) return;
+
+    try {
+        const q = query(collection(db, "articles"), orderBy("createdAt", "desc"), limit(3));
+        const snap = await getDocs(q);
+
+        if (snap.empty) {
+            container.innerHTML = "<p class='text-gray-400 text-center col-span-3'>لا توجد مقالات مضافة بعد.</p>";
+            return;
+        }
+
+        container.innerHTML = "";
+        snap.forEach(docSnap => {
+            const data = docSnap.data();
+            const card = document.createElement('div');
+            card.className = "bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition group border border-gray-100";
+            card.innerHTML = `
+                <div class="h-48 overflow-hidden rounded-xl mb-6">
+                    <img src="${data.image || 'https://images.unsplash.com/photo-1576091160550-217359f4ecf8?auto=format&fit=crop&q=80&w=800'}" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${data.title}">
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">${data.title}</h3>
+                <p class="text-gray-500 text-sm line-clamp-3 mb-4">${data.content.replace(/<[^>]*>/g, '').substring(0, 100)}...</p>
+                <a href="articles/${docSnap.id}.html" class="text-blue-600 font-bold hover:text-blue-800 transition">اقرأ المزيد &larr;</a>
+            `;
+            container.appendChild(card);
+        });
+    } catch (e) {
+        console.error("Error loading home articles:", e);
+        container.innerHTML = "<p class='text-red-500 text-center col-span-3'>خطأ في تحميل المقالات.</p>";
+    }
+}
+
+export async function initBlogPage() {
+    const grid = document.getElementById('articlesGrid');
+    if (!grid) return;
+
+    // If grid already has children (from static gen), don't reload dynamically
+    if (grid.children.length > 0 && !grid.querySelector('.animate-pulse')) {
+        console.log("Articles already present (static version).");
+        return;
+    }
+
+    try {
+        const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
+
+        grid.innerHTML = "";
+        if (snap.empty) {
+            grid.innerHTML = "<p class='text-gray-400 text-center col-span-3'>لا توجد مقالات مضافة بعد.</p>";
+            return;
+        }
+
+        snap.forEach(docSnap => {
+            const data = docSnap.data();
+            const card = document.createElement('div');
+            card.className = "bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition group border border-gray-100";
+            card.innerHTML = `
+                <div class="h-48 overflow-hidden rounded-xl mb-6">
+                    <img src="${data.image || 'https://images.unsplash.com/photo-1576091160550-217359f4ecf8?auto=format&fit=crop&q=80&w=800'}" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${data.title}">
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">${data.title}</h3>
+                <p class="text-gray-500 text-sm line-clamp-3 mb-4">${data.content.replace(/<[^>]*>/g, '').substring(0, 100)}...</p>
+                <a href="articles/${docSnap.id}.html" class="text-blue-600 font-bold hover:text-blue-800 transition">اقرأ المزيد &larr;</a>
+            `;
+            grid.appendChild(card);
+        });
+    } catch (e) {
+        console.error("Error loading blog page:", e);
+        grid.innerHTML = "<p class='text-red-500 text-center col-span-3'>خطأ في تحميل المقالات.</p>";
+    }
+}
+
+// Ensure other internal functions are exported if needed or bind to window
+window.searchPatientHistory = searchPatientHistory;
+window.loadHomeArticles = loadHomeArticles;
+window.initBlogPage = initBlogPage;
